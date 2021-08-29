@@ -3,6 +3,7 @@ package format
 import (
 	"bytes"
 	"encoding/binary"
+	"fmt"
 	"log"
 	"os"
 	"unsafe"
@@ -81,5 +82,5 @@ func (h *Header) Encode(fp *os.File) {
 
 // CheckHeaderSize makes sure the header size is 32 bytes
 func CheckHeaderSize() {
-	utils.Assert(32 == int(unsafe.Sizeof(Header{})), "Header must be 32-bytes, found: "+string(unsafe.Sizeof(Header{}))+" bytes")
+	utils.Assert(int(unsafe.Sizeof(Header{})) == 32, "Header must be 32-bytes, found: "+fmt.Sprint(unsafe.Sizeof(Header{}))+" bytes")
 }

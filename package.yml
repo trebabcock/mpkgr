@@ -1,0 +1,21 @@
+name: micro
+version: "1.0"
+release: 1
+source:
+  https://github.com/zyedidia/micro/releases/download/v2.0.10/micro-2.0.10-linux64.tar.gz: 98797d745aec85b36a9cedc87ce7656adcd8cc94c909a07edeb6e61538418bed
+license:
+- MIT
+summary: A short summary of the program.
+group: ""
+description: A longer description of the program.
+builddeps:
+- EDIT THIS
+rundeps:
+- EDIT THIS
+homepage: https://www.example.com/
+setup:
+- ""
+build:
+- '%make'
+install:
+- '%make-install'
