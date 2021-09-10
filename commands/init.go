@@ -66,6 +66,12 @@ func initPackage() format.Package {
 		src[os.Args[2]] = sumString
 		temp = strings.Split(filename, "-")
 		name = temp[0]
+		/*version := *semver.Version{}
+		version, err = semver.NewVersion(temp[1])
+		if err != nil {
+			log.Println("Unable parse version, defaulting to 1.0")
+			version, err = semver.NewVersion("1.0")
+		}*/
 	} else {
 		log.Fatal("Must pass a url to a file")
 	}
