@@ -3,16 +3,16 @@ Mpkgr is the build system for the mpkg package manager. It's currently non-funct
 
 # Progress
 ### Build
+- [ ] Build packages in isolated chroot environment (not possible until I can bootstrap the distro)
 - [X] Generate package.yml for new packages
 - [X] Read package.yml to get package information
-- [ ] Build package based on package.yml
-- [ ] Parse install instructions
+- [X] Build package based on package.yml
+- [X] Parse install instructions
 - [X] Describe package contents in header
 - [X] ContentPayload for package files
-- [ ] Payload for install instructions
 - [X] Write everything to package.mpkg
 
 ### Install
-- [ ] Read package.mpkg
-- [ ] Determine structure of file
-- [ ] Run install instructions for ContentPayload
+- [X] Read package.mpkg
+- [X] Determine structure of file
+- [X] Run install instructions for ContentPayload
