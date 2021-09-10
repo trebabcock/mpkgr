@@ -77,7 +77,7 @@ func initPackage() format.Package {
 	}
 	pkg := format.Package{
 		Name:        name,
-		Version:     "1.0",
+		Version:     "1.0.0",
 		Release:     1,
 		Source:      src,
 		License:     []string{"MIT"},

@@ -1,7 +1,6 @@
 package commands
 
 import (
-	"archive/tar"
 	"bytes"
 	"fmt"
 	"io"
@@ -9,10 +8,10 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"path/filepath"
 
 	"mpkgr/format"
 	"mpkgr/pkg"
+	"mpkgr/utils"
 
 	"github.com/kelindar/binary"
 	"gopkg.in/yaml.v2"
@@ -50,31 +49,7 @@ func BuildPackage() {
 		Scripts:      pkgConfig.Install,
 	}
 
-	fileinfo, err := ioutil.ReadDir("./build_output")
-	if err != nil {
-		log.Fatal("Unable to read files: ", err)
-	}
-
-	files := []*os.File{}
-	for _, f := range fileinfo {
-		file, err := os.Open("./build_output/" + f.Name())
-		if err != nil {
-			log.Fatal("Unable to open ", f.Name(), ": ", err)
-		}
-		files = append(files, file)
-	}
-
-	fileBytes := []byte{}
-
-	for _, f := range files {
-		temp, err := ioutil.ReadAll(f)
-		if err != nil {
-			log.Fatal("Unable to read ", f.Name(), ": ", err)
-		}
-		fileBytes = append(fileBytes, temp)
-	}
-
-	tarDir("./build_output", "content.tar")
+	utils.TarDir("./build_output", "content.tar")
 
 	tarFile, err := os.Open("./content.tar")
 	if err != nil {
@@ -120,50 +95,6 @@ func buildSetup(config *format.Package) {
 			return
 		}
 		fmt.Println(string(stdout))
-	}
-}
-
-func tarDir(sourcedir string, destinationfile string) {
-	dir, err := os.Open(sourcedir)
-	checkerror(err)
-	defer dir.Close()
-
-	// get list of files
-	files, err := dir.Readdir(0)
-	checkerror(err)
-
-	// create tar file
-	tarfile, err := os.Create(destinationfile)
-	checkerror(err)
-	defer tarfile.Close()
-
-	var fileWriter io.WriteCloser = tarfile
-
-	tarfileWriter := tar.NewWriter(fileWriter)
-	defer tarfileWriter.Close()
-
-	for _, fileInfo := range files {
-
-		if fileInfo.IsDir() {
-			continue
-		}
-
-		file, err := os.Open(dir.Name() + string(filepath.Separator) + fileInfo.Name())
-		checkerror(err)
-		defer file.Close()
-
-		// prepare the tar header
-		header := new(tar.Header)
-		header.Name = file.Name()
-		header.Size = fileInfo.Size()
-		header.Mode = int64(fileInfo.Mode())
-		header.ModTime = fileInfo.ModTime()
-
-		err = tarfileWriter.WriteHeader(header)
-		checkerror(err)
-
-		_, err = io.Copy(tarfileWriter, file)
-		checkerror(err)
 	}
 }
 

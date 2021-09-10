@@ -19,5 +19,5 @@ type PackageMeta struct {
 }
 
 type PackageContent struct {
-	Files [][]byte
+	Files []byte
 }
