@@ -87,15 +87,13 @@ func BuildPackage() {
 }
 
 func buildSetup(config *format.Package) {
-	for _, c := range config.Setup {
-		cmd := exec.Command("bash", "-c", c)
-		stdout, err := cmd.Output()
-		if err != nil {
-			log.Fatal("Unable to run Setup commands: ", err)
-			return
-		}
-		fmt.Println(string(stdout))
+	cmd := exec.Command("bash", "-c", config.Setup)
+	stdout, err := cmd.Output()
+	if err != nil {
+		log.Fatal("Unable to run Setup commands: ", err)
+		return
 	}
+	fmt.Println(string(stdout))
 }
 
 func checkerror(err error) {

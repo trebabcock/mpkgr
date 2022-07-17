@@ -12,7 +12,7 @@ type Package struct {
 	Builddeps   []string          `yaml:"builddeps"`
 	Rundeps     []string          `yaml:"rundeps"`
 	Homepage    string            `yaml:"homepage"`
-	Setup       []string          `yaml:"setup"`
-	Build       []string          `yaml:"build"`
-	Install     []string          `yaml:"install"`
+	Setup       string            `yaml:"setup"`
+	Build       string            `yaml:"build"`
+	Install     string            `yaml:"install"`
 }

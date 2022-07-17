@@ -86,9 +86,9 @@ func initPackage() format.Package {
 		Builddeps:   []string{"EDIT THIS"},
 		Rundeps:     []string{"EDIT THIS"},
 		Homepage:    "https://www.example.com/",
-		Setup:       []string{""},
-		Build:       []string{"%make"},
-		Install:     []string{"%make-install"},
+		Setup:       "",
+		Build:       "%make",
+		Install:     "%make-install",
 	}
 
 	return pkg

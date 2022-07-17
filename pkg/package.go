@@ -15,7 +15,7 @@ type PackageMeta struct {
 	Version      string
 	Dependencies []string
 	//Maintainer   string
-	Scripts []string
+	Scripts string
 }
 
 type PackageContent struct {
